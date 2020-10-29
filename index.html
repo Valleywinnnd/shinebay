@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <title>世贸滚动</title>
+
+    <link href="//public.pannacloud.com/css/animate.min.css" type="text/css" rel="stylesheet"/>
+    <link href="//public.pannacloud.com/css/panna_com.1.0.3.css" type="text/css" rel="stylesheet"/>
+    <link href="//public.pannacloud.com/swiper/3.0.8/css/swiper.min.css" type="text/css" rel="stylesheet"/>
+    <link href="//public.pannacloud.com/css/popup.css" type="text/css" rel="stylesheet"/>
+    <link href="css/index.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="//public.pannacloud.com/jquery/jquery-3.1.1.min.js"></script>
+    <script src="js/preloadjs.js"></script>
+    <script src="js/soundjs.js"></script>
+    <script src="//public.pannacloud.com/js/pn_com.js"></script>
+    <script type="text/javascript" src="//public.pannacloud.com/swiper/3.0.8/js/swiper.min.js"></script>
+    <script type="text/javascript" src="//public.pannacloud.com/js/popup.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="//cdn.pannacloud.com/js/share.1.0.1.js"></script>
+    <script type="text/javascript">
+        SHARE.hideCopyUrl();
+        SHARE.shareOption({
+            link: "",
+            pic: "",
+            title: "",
+            desc: "",
+            success: function () {
+
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- loading 界面 -->
+    <div class="loading loading-panna" id="loading" style="background:#fff;">
+        <div class="loadingArea">
+            <embed src="//public.pannacloud.com/img/loading/loading10.svg" width="70" height="70" type="image/svg+xml" pluginspage="http://www.adobe.com/svg/viewer/install/" class="loadingSvg" />
+            <p class="loading-percent" style="opacity: 1;color:#000;">0%</p>
+        </div>
+    </div>
+
+    <!-- swiper 界面 -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- slide1 -->
+            <div class="swiper-slide page page1 preloadBg" data-src="./img/bg1.png">
+                <img data-src="./img/logo_l.png" class="preload logo-l" >
+                <img data-src="./img/logo_r.png" class="preload logo-r" >
+                <img data-src="./img/letter.png" class="preload letter" >
+                <img data-src="./img/circle_r.png" class="preload circle-r animated fadeInRight hidden" >
+                <img data-src="./img/circle_l.png" class="preload circle-l animated fadeInLeft hidden" >
+                <img data-src="./img/copyright.png" class="preload copyright animated fadeInUp hidden" >
+                <img data-src="./img/village.png" class="preload village animated fadeInDown hidden" >
+                <img data-src="./img/shinebay.png" class="preload shinebay animated scaleBig hidden" >
+                <img data-src="./img/CTLD.png" class="preload CTLD animated scaleLittle hidden" >
+            </div>
+        </div>
+    </div>
+
+    <!-- 配置界面 -->
+    <script src="./js/pn_loader.js"></script>
+    <script>
+        window.onload = function() {
+            $.comFunc().config({
+                 prevent: true,
+                 arrow: true,
+                 test: false,
+                 screenLock: false,
+                //  arrowImgUrl: 'img/arr.jpg'
+            })
+        };
+        var sourceData = []
+
+        $(function(){
+            $.bugFixed();
+            $.winInit(750);
+
+            $.loader({
+                staticResource: sourceData,
+                bgmCtrl: true,
+                // bgmCtrlIcon: [
+                //     {src: 'img/music_on.png', id: 'music-open'},
+                //     {src: 'img/music_off.png', id: 'music-close'}
+                // ],
+
+                handleLoading: function(evt) {
+                    var cProgress = Math.floor(evt.loaded * 100);
+                    $('.loading-percent').html(cProgress + '%')
+                },
+                handleFileLoaded: function(event) {
+                    console.log(event)
+                },
+                handleComplete: function() {
+                    $('.loading').remove()
+                    $('.page1').children().show()
+                }
+            });
+
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'vertical',
+                resistanceRatio: 0,
+                onSlideChangeEnd: function() {
+                    var i = mySwiper.activeIndex;
+                    console.log(i)
+                }
+            })
+
+            $.statistics('statistics');
+        })
+    </script>
+    
+</body>
+</html>
